@@ -1,0 +1,61 @@
+﻿@model PenaltyCalculator.Models.Penalty
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Penalty Calculator</h2>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+        <div class="form-group">
+            @Html.LabelFor(model => model.CheckoutDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.CheckoutDate, new { htmlAttributes = new { @class = "form-control datepicker" } })
+                @Html.ValidationMessageFor(model => model.CheckoutDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ReturnDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ReturnDate, new { htmlAttributes = new { @class = "form-control datepicker" } })
+                @Html.ValidationMessageFor(model => model.ReturnDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.CountryList, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+
+                @Html.DropDownList("CountryID", Model.CountryList, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.CountryList, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="control-label col-md-2" style="font-weight:bold">
+                Calculated Business Days
+            </div>
+            <div class="col-md-10">
+                <span>
+                    @Model.CalculatedBusinessDays
+                </span>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="control-label col-md-2" style="font-weight:bold">
+                Calculated Penalty
+            </div>
+            <div class="col-md-10">
+                <span>
+                    @Model.CalculatedPenalty @Model.Currency
+                </span>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Calculate" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+
+}
